@@ -6,7 +6,7 @@
 npm install -g create-react-native-app exp
 3. Then run the following commands to create a new React Native project called "Calculator":
 create-react-native-app Calculator
-cd Calculator
-4. Copy react-native-expo-calculator files to your new project
-5. npm install
-6. exp start
+4. cd Calculator
+5. Copy react-native-expo-calculator files to your new project
+6. npm install
+7. exp start
