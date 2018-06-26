@@ -7,9 +7,7 @@ export default class Message extends PureComponent {
 
     return visible ? (
       <View style={styles.container}>
-        <Text style={styles.text}>{`Сохранено в буфер: ${
-          this.props.value
-        }`}</Text>
+        <Text style={styles.text}>{this.props.value}</Text>
       </View>
     ) : null;
   }
@@ -22,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     bottom: 0,
     width: "100%",
-    height: 40,
+    height: 36,
     justifyContent: "center",
     alignItems: "center"
   },
