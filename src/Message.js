@@ -3,11 +3,11 @@ import { View, Text, StyleSheet } from "react-native";
 
 export default class Message extends PureComponent {
   render() {
-    const visible = this.props.messageVisible;
+    const visible = this.props.visible;
 
     return visible ? (
       <View style={styles.container}>
-        <Text style={styles.text}>{this.props.value}</Text>
+        <Text style={styles.text}>{this.props.message}</Text>
       </View>
     ) : null;
   }
