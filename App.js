@@ -16,7 +16,7 @@ const buttons = [
 const initialOutput = "0";
 const maxLength = 17;
 
-export default class Calculator extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -171,7 +171,7 @@ export default class Calculator extends Component {
         }
       }
     } catch (exception) {
-      this._showMessage(`Неверный формат! ${exception}`);
+      this._showMessage(`${exception}`);
     }
   };
 
@@ -214,15 +214,18 @@ export default class Calculator extends Component {
   _setToClipboard = () => {
     const clipboard = this.state._resultNumberOutput.toString();
     Clipboard.setString(clipboard);
-    this._showMessage();
+    this._showMessage(`Сохранено в буфер: ${clipboard}`);
   };
 
-  _showMessage = () => {
-    this.setState({ messageVisible: !this.state.messageVisible }, () => {
-      setTimeout(() => {
-        this.setState({ messageVisible: !this.state.messageVisible });
-      }, 3000);
-    });
+  _showMessage = message => {
+    this.setState(
+      { messageVisible: !this.state.messageVisible, message: message },
+      () => {
+        setTimeout(() => {
+          this.setState({ messageVisible: !this.state.messageVisible });
+        }, 3000);
+      }
+    );
   };
 
   render() {
@@ -235,7 +238,7 @@ export default class Calculator extends Component {
           />
           <Message
             messageVisible={this.state.messageVisible}
-            value={this.state._resultNumberOutput}
+            value={this.state.message}
           />
         </View>
         <View style={styles.contOutput}>
