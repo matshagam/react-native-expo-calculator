@@ -237,8 +237,8 @@ export default class App extends Component {
             onClear={this._clearHistory}
           />
           <Message
-            messageVisible={this.state.messageVisible}
-            value={this.state.message}
+            visible={this.state.messageVisible}
+            message={this.state.message}
           />
         </View>
         <View style={styles.contOutput}>
