@@ -1,32 +1,28 @@
-import React, { PureComponent } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default class Message extends PureComponent {
-  render() {
-    const visible = this.props.visible;
-
-    return visible ? (
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.props.message}</Text>
-      </View>
-    ) : null;
-  }
-}
+export const Message = ({ visible, message }) => {
+  return visible ? (
+    <View style={styles.container}>
+      <Text style={styles.text}>{message}</Text>
+    </View>
+  ) : null;
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F6F6F6",
-    position: "absolute",
+    backgroundColor: '#F6F6F6',
+    position: 'absolute',
     flex: 1,
     bottom: 0,
-    width: "100%",
+    width: '100%',
     height: 36,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   text: {
-    color: "#000",
-    fontFamily: "Helvetica-Light",
+    color: '#000',
+    fontFamily: 'Helvetica-Light',
     fontSize: 16
   }
 });

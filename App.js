@@ -1,38 +1,39 @@
-import React, { Component } from "react";
-import { Clipboard, View, Text, Platform, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import { Clipboard, View, Text, Platform, StyleSheet } from 'react-native';
 
-import NumberButtons from "./src/Numbers";
-import HistoryView from "./src/History";
-import Message from "./src/Message";
+import NumberButtons from './src/Numbers';
+import { HistoryView } from './src/History';
+import { Message } from './src/Message';
 
 const buttons = [
-  ["СОХР", "ОЧИС", "УДАЛ", "%"],
-  ["7", "8", "9", " ÷ "],
-  ["4", "5", "6", " x "],
-  ["1", "2", "3", " + "],
-  [".", "0", " = ", " - "]
+  ['СОХР', 'ОЧИС', 'УДАЛ', '%'],
+  ['7', '8', '9', ' ÷ '],
+  ['4', '5', '6', ' x '],
+  ['1', '2', '3', ' + '],
+  ['.', '0', ' = ', ' - ']
 ];
 
-const initialOutput = "0";
+const initialOutput = '0';
 const maxLength = 17;
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _symbolOutput: "",
+      _symbolOutput: '',
       _numberOutput: initialOutput,
-      _resultSymbolOutput: "",
+      _resultSymbolOutput: '',
       _resultNumberOutput: initialOutput,
       _history: [],
-      messageVisible: false
+      messageVisible: false,
+      message: ''
     };
     this._clearHistory = this._clearHistory.bind(this);
     this._handleEvent = this._handleEvent.bind(this);
   }
 
   _handleEvent = value => {
-    if (!isNaN(value) || value == "." || value == "%") {
+    if (!isNaN(value) || value == '.' || value == '%') {
       this._concatToNumberOutput(value);
     } else {
       switch (value) {
@@ -41,7 +42,7 @@ export default class App extends Component {
         case buttons[3][3]:
         case buttons[4][3]:
           if (
-            this.state._resultSymbolOutput !== "=" ||
+            this.state._resultSymbolOutput !== '=' ||
             this.state._symbolOutput
           ) {
             this._evaluate();
@@ -63,7 +64,7 @@ export default class App extends Component {
               _numberOutput: initialOutput
             });
           } else {
-            this._replaceLastIndex("");
+            this._replaceLastIndex('');
           }
           break;
 
@@ -71,7 +72,7 @@ export default class App extends Component {
           this._evaluate();
           this.setState({
             _resultSymbolOutput: value,
-            _symbolOutput: ""
+            _symbolOutput: ''
           });
           break;
       }
@@ -84,10 +85,10 @@ export default class App extends Component {
     } else {
       if (this.state._numberOutput !== initialOutput) {
         this.setState({
-          _numberOutput: this.state._numberOutput + "" + value + ""
+          _numberOutput: this.state._numberOutput + '' + value + ''
         });
       } else {
-        this.setState({ _numberOutput: value + "" });
+        this.setState({ _numberOutput: value + '' });
       }
     }
   };
@@ -95,13 +96,13 @@ export default class App extends Component {
   _concatToSymbolOutput = value => {
     if (this.state._symbolOutput) {
       this.setState({
-        _symbolOutput: value + "",
-        _resultSymbolOutput: ""
+        _symbolOutput: value + '',
+        _resultSymbolOutput: ''
       });
     } else {
       this.setState({
-        _symbolOutput: "" + value,
-        _resultSymbolOutput: ""
+        _symbolOutput: '' + value,
+        _resultSymbolOutput: ''
       });
     }
   };
@@ -120,7 +121,7 @@ export default class App extends Component {
       let dEval;
       let tEval;
       if (_numberOutput !== initialOutput) {
-        if (_numberOutput.includes("%")) {
+        if (_numberOutput.includes('%')) {
           tEval =
             eval(
               _resultNumberOutput +
@@ -133,9 +134,9 @@ export default class App extends Component {
             _resultNumberOutput +
               _symbolOutput +
               _numberOutput +
-              " (" +
+              ' (' +
               tEval +
-              ")",
+              ')',
             dEval
           ]);
 
@@ -177,29 +178,29 @@ export default class App extends Component {
 
   _convertToMathExpression = value => {
     let strTemp = value.replace(
-      new RegExp(this._escapeRegExp(buttons[1][3]), "g"),
-      "/"
+      new RegExp(this._escapeRegExp(buttons[1][3]), 'g'),
+      '/'
     );
     strTemp = strTemp.replace(
-      new RegExp(this._escapeRegExp(buttons[2][3]), "g"),
-      "*"
+      new RegExp(this._escapeRegExp(buttons[2][3]), 'g'),
+      '*'
     );
     return strTemp;
   };
 
   _escapeRegExp = str => {
-    if (this.state._numberOutput.includes("%")) {
-      return str.replace(/[+]|[-]/g, "*");
+    if (this.state._numberOutput.includes('%')) {
+      return str.replace(/[+]|[-]/g, '*');
     } else {
-      return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+      return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
     }
   };
 
   _initOutput = () => {
     this.setState({
-      _symbolOutput: "",
+      _symbolOutput: '',
       _numberOutput: initialOutput,
-      _resultSymbolOutput: "",
+      _resultSymbolOutput: '',
       _resultNumberOutput: initialOutput
     });
   };
@@ -271,7 +272,7 @@ const styles = StyleSheet.create({
       }
     }),
     flex: 1,
-    flexDirection: "column"
+    flexDirection: 'column'
   },
   contHistory: {
     flex: 0.45
@@ -281,20 +282,20 @@ const styles = StyleSheet.create({
   },
   contButtons: {
     flex: 0.9,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff'
   },
   placeHolderOutput: {
     flex: 1,
-    backgroundColor: "#dedede",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    backgroundColor: '#dedede',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingTop: 5,
     paddingHorizontal: 15
   },
   txtDefault: {
-    color: "#000",
-    fontFamily: "Helvetica-Light",
+    color: '#000',
+    fontFamily: 'Helvetica-Light',
     fontSize: 30
   }
 });
