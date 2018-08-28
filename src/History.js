@@ -21,12 +21,7 @@ export const HistoryView = ({ onClear, data }) => {
         </TouchableOpacity>
       </View>
       {!bEmpty ? (
-        <ScrollView
-          ref={ref => (this.scrollView = ref)}
-          onContentSizeChange={(contentWidth, contentHeight) => {
-            this.scrollView.scrollToEnd({ animated: true });
-          }}
-        >
+        <ScrollView>
           {data.map((history, index) => (
             <View key={index} style={styles.historyCont}>
               <View style={styles.placeHolderHistory}>
