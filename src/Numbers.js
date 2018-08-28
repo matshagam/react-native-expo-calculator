@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -10,38 +10,32 @@ import {
 
 const width = Dimensions.get('window').width;
 
-export default class NumberButtons extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  }
-
+export const NumberButtons = ({ onBtnPress, buttons }) => {
   _handleOnPress = value => {
     requestAnimationFrame(() => {
-      this.props.onBtnPress(value);
+      onBtnPress(value);
     });
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.props.buttons.map((row, index) => (
-          <View key={index} style={styles.contRow}>
-            {row.map((col, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => this._handleOnPress(col)}
-              >
-                <View style={styles.contButton}>
-                  <Text style={styles.txtDefault}>{col}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      {buttons.map((row, index) => (
+        <View key={index} style={styles.contRow}>
+          {row.map((col, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => this._handleOnPress(col)}
+            >
+              <View style={styles.contButton}>
+                <Text style={styles.txtDefault}>{col}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

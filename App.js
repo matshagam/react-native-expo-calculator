@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Clipboard, View, Text, Platform, StyleSheet } from 'react-native';
 
-import NumberButtons from './src/Numbers';
+import { NumberButtons } from './src/Numbers';
 import { HistoryView } from './src/History';
 import { Message } from './src/Message';
 
