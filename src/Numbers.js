@@ -11,21 +11,12 @@ import {
 const width = Dimensions.get('window').width;
 
 export const NumberButtons = ({ onBtnPress, buttons }) => {
-  _handleOnPress = value => {
-    requestAnimationFrame(() => {
-      onBtnPress(value);
-    });
-  };
-
   return (
     <View style={styles.container}>
       {buttons.map((row, index) => (
         <View key={index} style={styles.contRow}>
           {row.map((col, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => this._handleOnPress(col)}
-            >
+            <TouchableOpacity key={index} onPress={() => onBtnPress(col)}>
               <View style={styles.contButton}>
                 <Text style={styles.txtDefault}>{col}</Text>
               </View>
