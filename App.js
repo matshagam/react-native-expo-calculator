@@ -33,7 +33,7 @@ export default class App extends Component {
   }
 
   _handleEvent = value => {
-    if (!isNaN(value) || value == '.' || value == '%') {
+    if (!isNaN(value) || value === '.' || value === '%') {
       this._concatToNumberOutput(value);
     } else {
       switch (value) {
@@ -80,6 +80,8 @@ export default class App extends Component {
   };
 
   _concatToNumberOutput = value => {
+    console.log(value);
+
     if (this.state._numberOutput.length >= maxLength) {
       this._showMessage(`Превышен максимум в ${maxLength} цифр!`);
     } else {

@@ -29,13 +29,11 @@ export const HistoryView = ({ onClear, data }) => {
         >
           {data.map((history, index) => (
             <View key={index} style={styles.historyCont}>
-              <View style={styles.placeHolderHistory}>
-                <View style={styles.expressionCont}>
-                  <Text style={styles.txtExpression}>{history[0]}</Text>
-                </View>
-                <View style={styles.resultCont}>
-                  <Text style={styles.txtResult}>{'= ' + history[1]}</Text>
-                </View>
+              <View style={styles.expressionCont}>
+                <Text style={styles.txtExpression}>{history[0]}</Text>
+              </View>
+              <View style={styles.resultCont}>
+                <Text style={styles.txtResult}>{'= ' + history[1]}</Text>
               </View>
             </View>
           ))}
@@ -71,15 +69,11 @@ const styles = StyleSheet.create({
   },
   historyCont: {
     flex: 1,
-    flexDirection: 'column'
-  },
-  placeHolderHistory: {
-    flex: 1,
+    flexDirection: 'column',
     marginLeft: 15,
     marginRight: 15,
     paddingTop: 0,
     paddingBottom: 0,
-    flexDirection: 'column',
     backgroundColor: 'transparent'
   },
   expressionCont: {
