@@ -33,7 +33,11 @@ export default class App extends Component {
   }
 
   _handleEvent = value => {
-    if (!isNaN(value) || value === '.' || value === '%') {
+    if (
+      (!isNaN(value) && !this.state._numberOutput.includes('%')) ||
+      (value === '.' && !this.state._numberOutput.includes(value)) ||
+      (value === '%' && !this.state._numberOutput.includes(value))
+    ) {
       this._concatToNumberOutput(value);
     } else {
       switch (value) {
@@ -80,8 +84,6 @@ export default class App extends Component {
   };
 
   _concatToNumberOutput = value => {
-    console.log(value);
-
     if (this.state._numberOutput.length >= maxLength) {
       this._showMessage(`Превышен максимум в ${maxLength} цифр!`);
     } else {
@@ -131,6 +133,8 @@ export default class App extends Component {
                 _numberOutput.slice(0, -1)
             ) / 100;
           dEval = eval(_resultNumberOutput + _symbolOutput + tEval);
+          console.log('dEval: ', dEval);
+          console.log('tEval: ', tEval);
 
           aHistory.push([
             _resultNumberOutput +
