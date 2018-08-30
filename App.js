@@ -123,6 +123,7 @@ export default class App extends Component {
       _firstNumberOutput,
       _history
     } = this.state;
+
     try {
       let aHistory = [..._history];
       let dEval;
@@ -135,19 +136,29 @@ export default class App extends Component {
                 this._escapeRegExp(_secondSymbolOutput) +
                 _secondNumberOutput.slice(0, -1)
             ) / 100;
-          dEval = eval(_firstNumberOutput + _secondSymbolOutput + tEval);
-          aHistory.push([
-            _firstNumberOutput +
-              _secondSymbolOutput +
-              _secondNumberOutput +
-              ' (' +
-              tEval +
-              ')',
-            dEval
-          ]);
+
+          if (_secondSymbolOutput.includes('x')) {
+            aHistory.push([
+              _firstNumberOutput + _secondSymbolOutput + _secondNumberOutput,
+              tEval
+            ]);
+          } else {
+            dEval = eval(_firstNumberOutput + _secondSymbolOutput + tEval);
+            aHistory.push([
+              _firstNumberOutput +
+                _secondSymbolOutput +
+                _secondNumberOutput +
+                ' (' +
+                tEval +
+                ')',
+              dEval
+            ]);
+          }
 
           this.setState({
-            _firstNumberOutput: dEval,
+            _firstNumberOutput: _secondSymbolOutput.includes('x')
+              ? tEval
+              : dEval,
             _secondNumberOutput: initialOutput,
             _history: aHistory
           });
@@ -200,7 +211,7 @@ export default class App extends Component {
   _escapeRegExp = str => {
     const { _secondNumberOutput } = this.state;
     if (_secondNumberOutput.includes('%')) {
-      return str.replace(/[+]|[-]/g, '*');
+      return str.replace(/[+]|[-]|[x]/g, '*');
     } else {
       return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
     }

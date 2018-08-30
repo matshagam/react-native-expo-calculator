@@ -37,7 +37,7 @@ export const NumberButtons = ({ onBtnPress, buttons }) => {
                   this._styledButtons(rowIndex, colIndex)
                 ]}
               >
-                <Text style={[styles.txtDefault]}>{col}</Text>
+                <Text style={styles.txtDefault}>{col}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -48,16 +48,6 @@ export const NumberButtons = ({ onBtnPress, buttons }) => {
 };
 
 const styles = StyleSheet.create({
-  actionStyle: {
-    backgroundColor: '#F2F2F2',
-    borderColor: '#ffff'
-  },
-  equallyStyle: {
-    backgroundColor: '#FECBCC'
-  },
-  numeralStyle: {
-    backgroundColor: '#D7E4F5'
-  },
   container: {
     flex: 1
   },
@@ -81,5 +71,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 0.5,
     borderColor: '#ecf0f1'
+  },
+  actionStyle: {
+    backgroundColor: '#F2F2F2',
+    borderColor: '#ffff'
+  },
+  equallyStyle: {
+    backgroundColor: '#FECBCC'
+  },
+  numeralStyle: {
+    backgroundColor: '#D7E4F5'
   }
 });
