@@ -124,12 +124,15 @@ export default class App extends Component {
       _history
     } = this.state;
 
+    let aHistory = [..._history];
+    let includesX = _secondSymbolOutput.includes('x') ? true : false;
+    let includesPercent = _secondNumberOutput.includes('%') ? true : false;
+    let dEval;
+    let tEval;
+
     try {
-      let aHistory = [..._history];
-      let dEval;
-      let tEval;
       if (_secondNumberOutput !== initialOutput) {
-        if (_secondNumberOutput.includes('%')) {
+        if (includesPercent) {
           tEval =
             eval(
               _firstNumberOutput +
@@ -137,7 +140,7 @@ export default class App extends Component {
                 _secondNumberOutput.slice(0, -1)
             ) / 100;
 
-          if (_secondSymbolOutput.includes('x')) {
+          if (includesX) {
             aHistory.push([
               _firstNumberOutput + _secondSymbolOutput + _secondNumberOutput,
               tEval
@@ -156,9 +159,7 @@ export default class App extends Component {
           }
 
           this.setState({
-            _firstNumberOutput: _secondSymbolOutput.includes('x')
-              ? tEval
-              : dEval,
+            _firstNumberOutput: includesX ? tEval : dEval,
             _secondNumberOutput: initialOutput,
             _history: aHistory
           });
