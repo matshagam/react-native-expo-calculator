@@ -16,7 +16,11 @@ export const HistoryView = ({ onClear, data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.clearCont}>
-        <TouchableOpacity transparent onPress={() => onClear()}>
+        <TouchableOpacity
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          transparent
+          onPress={() => onClear()}
+        >
           <Text style={styles.buttonEmptyHistoryText}>УДАЛИТЬ ИСТОРИЮ</Text>
         </TouchableOpacity>
       </View>
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
   },
   clearCont: {
     height: 30,
+    width: 150,
     alignItems: 'flex-start',
     paddingLeft: 15,
     justifyContent: 'center'

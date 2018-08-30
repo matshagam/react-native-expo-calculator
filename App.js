@@ -229,10 +229,9 @@ export default class App extends Component {
   };
 
   _showMessage = message => {
-    const { messageVisible } = this.state;
-    this.setState({ messageVisible: !messageVisible, message: message }, () => {
+    this.setState({ messageVisible: true, message: message }, () => {
       setTimeout(() => {
-        this.setState({ messageVisible: !messageVisible });
+        this.setState({ messageVisible: false });
       }, 3000);
     });
   };
@@ -247,6 +246,7 @@ export default class App extends Component {
       messageVisible,
       message
     } = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.contHistory}>

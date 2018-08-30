@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 47395,
+  "expoServerNgrokUrl": "https://kn-tfy.matshagam.react-native-expo-calculator.exp.direct",
+  "packagerNgrokUrl": "https://packager.kn-tfy.matshagam.react-native-expo-calculator.exp.direct",
+  "ngrokPid": 47417
 }
