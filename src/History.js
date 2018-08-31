@@ -4,10 +4,14 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export const HistoryView = ({ onClear, data }) => {
+const width = Dimensions.get('window').width;
+
+export const HistoryView = ({ onClear, data, _showSettings }) => {
   let bEmpty = false;
   if (data.length === 0) {
     bEmpty = true;
@@ -16,6 +20,13 @@ export const HistoryView = ({ onClear, data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.clearCont}>
+        <TouchableOpacity
+          onPress={() => {
+            _showSettings();
+          }}
+        >
+          <Ionicons name="ios-settings-outline" size={23} color="#7f8c8d" />
+        </TouchableOpacity>
         <TouchableOpacity
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           transparent
@@ -57,10 +68,14 @@ const styles = StyleSheet.create({
   },
   clearCont: {
     height: 30,
-    width: 150,
-    alignItems: 'flex-start',
-    paddingLeft: 15,
-    justifyContent: 'center'
+    width: width,
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    backgroundColor: '#fff',
+    zIndex: 1
   },
   txtExpression: {
     color: '#000',

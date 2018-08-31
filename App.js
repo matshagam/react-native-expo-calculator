@@ -6,6 +6,7 @@ import { HistoryView } from './src/History';
 import { Message } from './src/Message';
 import { FirstOutput } from './src/firstOutput';
 import { SecondOutput } from './src/secondOutput';
+import { Settings } from './src/Settings';
 import { buttons, initialOutput, maxLength } from './src/initialState';
 
 export default class App extends Component {
@@ -18,10 +19,12 @@ export default class App extends Component {
       _secondNumberOutput: initialOutput,
       _history: [],
       messageVisible: false,
+      settingsVisible: false,
       message: ''
     };
     this._clearHistory = this._clearHistory.bind(this);
     this._handleEvent = this._handleEvent.bind(this);
+    this._showSettings = this._showSettings.bind(this);
   }
 
   _handleEvent = value => {
@@ -118,9 +121,9 @@ export default class App extends Component {
 
   _evaluate = () => {
     const {
+      _firstNumberOutput,
       _secondNumberOutput,
       _secondSymbolOutput,
-      _firstNumberOutput,
       _history
     } = this.state;
 
@@ -136,7 +139,7 @@ export default class App extends Component {
           tEval =
             eval(
               _firstNumberOutput +
-                this._escapeRegExp(_secondSymbolOutput) +
+                _secondSymbolOutput.replace(/[+]|[-]|[x]/g, '*') +
                 _secondNumberOutput.slice(0, -1)
             ) / 100;
 
@@ -210,12 +213,7 @@ export default class App extends Component {
   };
 
   _escapeRegExp = str => {
-    const { _secondNumberOutput } = this.state;
-    if (_secondNumberOutput.includes('%')) {
-      return str.replace(/[+]|[-]|[x]/g, '*');
-    } else {
-      return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
-    }
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
   };
 
   _initOutput = () => {
@@ -248,6 +246,12 @@ export default class App extends Component {
     });
   };
 
+  _showSettings = () => {
+    this.setState({
+      settingsVisible: !this.state.settingsVisible
+    });
+  };
+
   render() {
     const {
       _secondNumberOutput,
@@ -256,13 +260,22 @@ export default class App extends Component {
       _firstSymbolOutput,
       _history,
       messageVisible,
+      settingsVisible,
       message
     } = this.state;
 
     return (
       <View style={styles.container}>
+        <Settings
+          visible={settingsVisible}
+          _showSettings={this._showSettings}
+        />
         <View style={styles.contHistory}>
-          <HistoryView data={_history} onClear={this._clearHistory} />
+          <HistoryView
+            data={_history}
+            onClear={this._clearHistory}
+            _showSettings={this._showSettings}
+          />
           <Message visible={messageVisible} message={message} />
         </View>
         <View style={styles.contOutput}>
@@ -291,7 +304,7 @@ const styles = StyleSheet.create({
   container: {
     ...Platform.select({
       ios: {
-        marginTop: 20
+        // marginTop: 20
       }
     }),
     flex: 1,
