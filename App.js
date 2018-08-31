@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Clipboard, View, Platform, StyleSheet } from 'react-native';
+import { Clipboard, View, Platform, StyleSheet, StatusBar } from 'react-native';
 
 import { NumberButtons } from './src/Numbers';
 import { HistoryView } from './src/History';
@@ -276,7 +276,19 @@ export default class App extends Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: theme.primaryColor
+          }
+        ]}
+      >
+        <StatusBar
+          barStyle={themeColor === 'light' ? 'dark-content' : 'light-content'}
+          translucent
+          backgroundColor="#5E8D48"
+        />
         <Settings
           visible={settingsVisible}
           _showSettings={this._showSettings}
@@ -330,7 +342,7 @@ const styles = StyleSheet.create({
   container: {
     ...Platform.select({
       ios: {
-        // marginTop: 20
+        paddingTop: 22
       }
     }),
     flex: 1,

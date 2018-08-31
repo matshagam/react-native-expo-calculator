@@ -11,31 +11,47 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 export const Settings = ({
-  visible,
   _showSettings,
-  themeColor,
   _changeThemeColor,
+  visible,
+  themeColor,
   theme
 }) => {
   return (
-    <View style={{ marginTop: 22 }}>
-      <Modal animationType="slide" transparent={false} visible={visible}>
-        <View style={{ marginTop: 22 }}>
-          <TouchableOpacity
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            onPress={() => {
-              _showSettings();
-            }}
+    <Modal animationType="slide" transparent={false} visible={visible}>
+      <View
+        style={[
+          styles.modalView,
+          {
+            backgroundColor: theme.primaryColor
+          }
+        ]}
+      >
+        <TouchableOpacity
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          onPress={() => {
+            _showSettings();
+          }}
+        >
+          <Ionicons
+            name="md-close"
+            size={32}
+            color={theme.secondaryColorTxt}
+            style={{ alignSelf: 'center' }}
+          />
+        </TouchableOpacity>
+        <View style={styles.pickerView}>
+          <Text
+            style={[
+              styles.pickerLabel,
+              {
+                color: theme.primaryColorTxt
+              }
+            ]}
           >
-            <Ionicons
-              name="md-close"
-              size={32}
-              color={theme.secondaryColorTxt}
-              style={{ alignSelf: 'center' }}
-            />
-          </TouchableOpacity>
-          <View>
-            <Text style={styles.pickerLabel}>Current theme:</Text>
+            Current theme:
+          </Text>
+          <View style={styles.pickerRound}>
             <Picker
               selectedValue={themeColor}
               style={styles.picker}
@@ -46,23 +62,39 @@ export const Settings = ({
             </Picker>
           </View>
         </View>
-      </Modal>
-    </View>
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
+  modalView: {
+    paddingTop: 22,
+    height: '100%'
+  },
+  pickerView: {
+    height: 115,
+    width: '100%',
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  pickerLabel: {
+    paddingLeft: 15,
+    fontSize: 22
+  },
+  pickerRound: {
+    height: 130,
+    width: 130,
+    backgroundColor: '#fff',
+    right: 15,
+    alignItems: 'center',
+    borderRadius: 100
+  },
   picker: {
     height: 50,
     width: 100,
-    right: 15,
-    top: -50,
-    position: 'absolute'
-  },
-  pickerLabel: {
-    paddingHorizontal: 15,
-    top: 44,
-    fontSize: 22,
-    backgroundColor: '#F2F2F2'
+    bottom: 43
   }
 });
