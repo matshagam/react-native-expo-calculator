@@ -20,7 +20,8 @@ export default class App extends Component {
       _history: [],
       messageVisible: false,
       settingsVisible: false,
-      message: ''
+      message: '',
+      themeColor: 'Light'
     };
     this._clearHistory = this._clearHistory.bind(this);
     this._handleEvent = this._handleEvent.bind(this);
@@ -252,6 +253,10 @@ export default class App extends Component {
     });
   };
 
+  _changeThemeColor = color => {
+    this.setState({ themeColor: color });
+  };
+
   render() {
     const {
       _secondNumberOutput,
@@ -261,7 +266,8 @@ export default class App extends Component {
       _history,
       messageVisible,
       settingsVisible,
-      message
+      message,
+      themeColor
     } = this.state;
 
     return (
@@ -269,6 +275,8 @@ export default class App extends Component {
         <Settings
           visible={settingsVisible}
           _showSettings={this._showSettings}
+          themeColor={themeColor}
+          _changeThemeColor={this._changeThemeColor}
         />
         <View style={styles.contHistory}>
           <HistoryView

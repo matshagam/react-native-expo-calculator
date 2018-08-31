@@ -21,6 +21,7 @@ export const HistoryView = ({ onClear, data, _showSettings }) => {
     <View style={styles.container}>
       <View style={styles.clearCont}>
         <TouchableOpacity
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           onPress={() => {
             _showSettings();
           }}
@@ -32,11 +33,16 @@ export const HistoryView = ({ onClear, data, _showSettings }) => {
           transparent
           onPress={() => onClear()}
         >
-          <Text style={styles.buttonEmptyHistoryText}>УДАЛИТЬ ИСТОРИЮ</Text>
+          <Text style={styles.buttonEmptyHistoryText}>
+            {!bEmpty ? 'УДАЛИТЬ ИСТОРИЮ' : null}
+          </Text>
         </TouchableOpacity>
       </View>
       {!bEmpty ? (
         <ScrollView
+          style={{
+            paddingTop: 25
+          }}
           ref={ref => (this.scrollView = ref)}
           onContentSizeChange={() => {
             this.scrollView.scrollToEnd({ animated: true });
