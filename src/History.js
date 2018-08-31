@@ -11,29 +11,38 @@ import { Ionicons } from '@expo/vector-icons';
 
 const width = Dimensions.get('window').width;
 
-export const HistoryView = ({ onClear, data, _showSettings }) => {
+export const HistoryView = ({ onClear, data, _showSettings, theme }) => {
   let bEmpty = false;
   if (data.length === 0) {
     bEmpty = true;
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.clearCont}>
+    <View style={[styles.container, { backgroundColor: theme.primaryColor }]}>
+      <View style={[styles.clearCont, { backgroundColor: theme.primaryColor }]}>
         <TouchableOpacity
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           onPress={() => {
             _showSettings();
           }}
         >
-          <Ionicons name="ios-settings-outline" size={23} color="#7f8c8d" />
+          <Ionicons
+            name="ios-settings-outline"
+            size={23}
+            color={theme.secondaryColorTxt}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           transparent
           onPress={() => onClear()}
         >
-          <Text style={styles.buttonEmptyHistoryText}>
+          <Text
+            style={[
+              styles.buttonEmptyHistoryText,
+              { color: theme.secondaryColorTxt }
+            ]}
+          >
             {!bEmpty ? 'УДАЛИТЬ ИСТОРИЮ' : null}
           </Text>
         </TouchableOpacity>
@@ -41,7 +50,7 @@ export const HistoryView = ({ onClear, data, _showSettings }) => {
       {!bEmpty ? (
         <ScrollView
           style={{
-            paddingTop: 25
+            marginTop: 25
           }}
           ref={ref => (this.scrollView = ref)}
           onContentSizeChange={() => {
@@ -51,7 +60,14 @@ export const HistoryView = ({ onClear, data, _showSettings }) => {
           {data.map((history, index) => (
             <View key={index} style={styles.historyCont}>
               <View style={styles.expressionCont}>
-                <Text style={styles.txtExpression}>{history[0]}</Text>
+                <Text
+                  style={[
+                    styles.txtExpression,
+                    { color: theme.primaryColorTxt }
+                  ]}
+                >
+                  {history[0]}
+                </Text>
               </View>
               <View style={styles.resultCont}>
                 <Text style={styles.txtResult}>{'= ' + history[1]}</Text>
@@ -61,7 +77,11 @@ export const HistoryView = ({ onClear, data, _showSettings }) => {
         </ScrollView>
       ) : (
         <View style={styles.emptyHistoryCont}>
-          <Text style={styles.txtEmptyHistory}>Нет истории вычислений</Text>
+          <Text
+            style={[styles.txtEmptyHistory, { color: theme.secondaryColorTxt }]}
+          >
+            Нет истории вычислений
+          </Text>
         </View>
       )}
     </View>
@@ -80,11 +100,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'absolute',
-    backgroundColor: '#fff',
     zIndex: 1
   },
   txtExpression: {
-    color: '#000',
     fontFamily: 'Helvetica-Light',
     fontSize: 13
   },
@@ -124,12 +142,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   txtEmptyHistory: {
-    color: '#7f8c8d',
     fontFamily: 'Helvetica-Light',
     fontSize: 15
   },
   buttonEmptyHistoryText: {
-    color: '#7f8c8d',
     fontFamily: 'Helvetica-Light',
     fontSize: 11
   }

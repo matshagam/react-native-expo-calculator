@@ -10,7 +10,7 @@ import {
 
 const width = Dimensions.get('window').width;
 
-export const NumberButtons = ({ onBtnPress, buttons }) => {
+export const NumberButtons = ({ onBtnPress, buttons, theme, themeColor }) => {
   _styledButtons = (rowIndex, colIndex) => {
     if (rowIndex === 0 && colIndex === 3) return styles.numeralStyle;
     if (rowIndex === 1 && colIndex === 3) return styles.numeralStyle;
@@ -34,10 +34,22 @@ export const NumberButtons = ({ onBtnPress, buttons }) => {
               <View
                 style={[
                   styles.contButton,
-                  this._styledButtons(rowIndex, colIndex)
+                  { borderColor: themeColor === 'light' ? '#ecf0f1' : null },
+                  themeColor === 'light'
+                    ? this._styledButtons(rowIndex, colIndex)
+                    : null
                 ]}
               >
-                <Text style={styles.txtDefault}>{col}</Text>
+                <Text
+                  style={[
+                    styles.txtDefault,
+                    {
+                      color: theme.primaryColorTxt
+                    }
+                  ]}
+                >
+                  {col}
+                </Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -52,7 +64,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   txtDefault: {
-    color: '#000',
     fontFamily: 'Helvetica-Light',
     fontSize: 20
   },
@@ -69,8 +80,7 @@ const styles = StyleSheet.create({
     }),
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 0.5,
-    borderColor: '#ecf0f1'
+    borderWidth: 0.5
   },
   actionStyle: {
     backgroundColor: '#F2F2F2',

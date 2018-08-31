@@ -8,3 +8,16 @@ export const buttons = [
 
 export const initialOutput = '0';
 export const maxLength = 17;
+
+export const theme = {
+  light: {
+    primaryColor: '#fff',
+    primaryColorTxt: '#000',
+    secondaryColorTxt: '#7f8c8d'
+  },
+  dark: {
+    primaryColor: '#000',
+    primaryColorTxt: '#fff',
+    secondaryColorTxt: '#7f8c8d'
+  }
+};

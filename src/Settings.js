@@ -14,7 +14,8 @@ export const Settings = ({
   visible,
   _showSettings,
   themeColor,
-  _changeThemeColor
+  _changeThemeColor,
+  theme
 }) => {
   return (
     <View style={{ marginTop: 22 }}>
@@ -29,7 +30,7 @@ export const Settings = ({
             <Ionicons
               name="md-close"
               size={32}
-              color="#7f8c8d"
+              color={theme.secondaryColorTxt}
               style={{ alignSelf: 'center' }}
             />
           </TouchableOpacity>
@@ -59,8 +60,9 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   pickerLabel: {
-    left: 15,
+    paddingHorizontal: 15,
     top: 44,
-    fontSize: 22
+    fontSize: 22,
+    backgroundColor: '#F2F2F2'
   }
 });

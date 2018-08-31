@@ -7,7 +7,7 @@ import { Message } from './src/Message';
 import { FirstOutput } from './src/firstOutput';
 import { SecondOutput } from './src/secondOutput';
 import { Settings } from './src/Settings';
-import { buttons, initialOutput, maxLength } from './src/initialState';
+import { buttons, initialOutput, maxLength, theme } from './src/initialState';
 
 export default class App extends Component {
   constructor(props) {
@@ -21,7 +21,8 @@ export default class App extends Component {
       messageVisible: false,
       settingsVisible: false,
       message: '',
-      themeColor: 'Light'
+      themeColor: 'light',
+      theme: theme.light
     };
     this._clearHistory = this._clearHistory.bind(this);
     this._handleEvent = this._handleEvent.bind(this);
@@ -254,7 +255,10 @@ export default class App extends Component {
   };
 
   _changeThemeColor = color => {
-    this.setState({ themeColor: color });
+    this.setState({
+      themeColor: color === 'light' ? 'light' : 'dark',
+      theme: color === 'light' ? theme.light : theme.dark
+    });
   };
 
   render() {
@@ -267,7 +271,8 @@ export default class App extends Component {
       messageVisible,
       settingsVisible,
       message,
-      themeColor
+      themeColor,
+      theme
     } = this.state;
 
     return (
@@ -277,12 +282,14 @@ export default class App extends Component {
           _showSettings={this._showSettings}
           themeColor={themeColor}
           _changeThemeColor={this._changeThemeColor}
+          theme={theme}
         />
         <View style={styles.contHistory}>
           <HistoryView
             data={_history}
             onClear={this._clearHistory}
             _showSettings={this._showSettings}
+            theme={theme}
           />
           <Message visible={messageVisible} message={message} />
         </View>
@@ -292,16 +299,27 @@ export default class App extends Component {
             txtDefault={styles.txtDefault}
             _firstSymbolOutput={_firstSymbolOutput}
             _firstNumberOutput={_firstNumberOutput}
+            theme={theme}
+            themeColor={themeColor}
           />
           <SecondOutput
             placeHolderOutput={styles.placeHolderOutput}
             txtDefault={styles.txtDefault}
             _secondSymbolOutput={_secondSymbolOutput}
             _secondNumberOutput={_secondNumberOutput}
+            theme={theme}
+            themeColor={themeColor}
           />
         </View>
-        <View style={styles.contButtons}>
-          <NumberButtons onBtnPress={this._handleEvent} buttons={buttons} />
+        <View
+          style={[styles.contButtons, { backgroundColor: theme.primaryColor }]}
+        >
+          <NumberButtons
+            onBtnPress={this._handleEvent}
+            buttons={buttons}
+            theme={theme}
+            themeColor={themeColor}
+          />
         </View>
       </View>
     );
@@ -325,12 +343,10 @@ const styles = StyleSheet.create({
     flex: 0.25
   },
   contButtons: {
-    flex: 0.9,
-    backgroundColor: '#fff'
+    flex: 0.9
   },
   placeHolderOutput: {
     flex: 1,
-    backgroundColor: '#dedede',
     justifyContent: 'space-between',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -338,7 +354,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15
   },
   txtDefault: {
-    color: '#000',
     fontFamily: 'Helvetica-Light',
     fontSize: 30,
     width: 'auto'

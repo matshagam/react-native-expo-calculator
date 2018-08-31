@@ -5,12 +5,23 @@ export const SecondOutput = ({
   _secondSymbolOutput,
   _secondNumberOutput,
   placeHolderOutput,
-  txtDefault
+  txtDefault,
+  themeColor,
+  theme
 }) => {
   return (
-    <View style={placeHolderOutput}>
-      <Text style={txtDefault}>{_secondSymbolOutput}</Text>
-      <Text style={txtDefault}>{_secondNumberOutput}</Text>
+    <View
+      style={[
+        placeHolderOutput,
+        { backgroundColor: themeColor === 'dark' ? '#000' : '#dedede' }
+      ]}
+    >
+      <Text style={[txtDefault, { color: theme.primaryColorTxt }]}>
+        {_secondSymbolOutput}
+      </Text>
+      <Text style={[txtDefault, { color: theme.primaryColorTxt }]}>
+        {_secondNumberOutput}
+      </Text>
     </View>
   );
 };
