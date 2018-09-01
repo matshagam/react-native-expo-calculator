@@ -5,7 +5,14 @@ import { StateContext } from '../../store/StateProvider';
 export const NumberButtons = () => {
   return (
     <StateContext.Consumer>
-      {({ onBtnPress, buttons, theme, themeColor, styles, _styledButtons }) => (
+      {({
+        buttons,
+        theme,
+        themeColor,
+        styles,
+        _handleEvent,
+        _styledButtons
+      }) => (
         <View
           style={[styles.contButtons, { backgroundColor: theme.primaryColor }]}
         >
@@ -15,7 +22,7 @@ export const NumberButtons = () => {
                 {row.map((col, colIndex) => (
                   <TouchableOpacity
                     key={colIndex}
-                    onPress={() => onBtnPress(col)}
+                    onPress={() => _handleEvent(col)}
                   >
                     <View
                       style={[

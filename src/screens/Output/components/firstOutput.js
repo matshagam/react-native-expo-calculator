@@ -6,8 +6,8 @@ export const FirstOutput = () => {
   return (
     <StateContext.Consumer>
       {({
-        _firstSymbolOutput,
-        _firstNumberOutput,
+        firstSymbolOutput,
+        firstNumberOutput,
         styles,
         themeColor,
         theme
@@ -21,12 +21,12 @@ export const FirstOutput = () => {
           <Text
             style={[styles.txtDefaultOutput, { color: theme.primaryColorTxt }]}
           >
-            {_firstSymbolOutput}
+            {firstSymbolOutput}
           </Text>
           <Text
             style={[styles.txtDefaultOutput, { color: theme.primaryColorTxt }]}
           >
-            {_firstNumberOutput}
+            {firstNumberOutput}
           </Text>
         </View>
       )}

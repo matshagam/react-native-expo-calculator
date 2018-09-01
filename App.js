@@ -7,8 +7,7 @@ import { Settings } from './src/screens/Settings/Settings';
 import { Output } from './src/screens/Output/Output';
 import { StatusBarStyle } from './src/screens/StatusBar/StatusBarStyle';
 
-import StateProvider from './src//store/StateProvider';
-import { StateContext } from './src/store/StateProvider';
+import StateProvider, { StateContext } from './src/store/StateProvider';
 
 const App = () => {
   return (

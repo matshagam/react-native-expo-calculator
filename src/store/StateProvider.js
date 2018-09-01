@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Clipboard, View } from 'react-native';
+import { Clipboard } from 'react-native';
 
 import {
   buttons,
@@ -15,16 +15,18 @@ export default class StateProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _firstSymbolOutput: '',
-      _firstNumberOutput: initialOutput,
-      _secondSymbolOutput: '',
-      _secondNumberOutput: initialOutput,
-      _history: [],
+      firstSymbolOutput: '',
+      firstNumberOutput: initialOutput,
+      secondSymbolOutput: '',
+      secondNumberOutput: initialOutput,
+      history: [],
       messageVisible: false,
       settingsVisible: false,
       message: '',
       themeColor: 'light',
-      theme: theme.light
+      theme: theme.light,
+      styles: styles,
+      buttons: buttons
     };
     this._clearHistory = this._clearHistory.bind(this);
     this._handleEvent = this._handleEvent.bind(this);
@@ -33,15 +35,15 @@ export default class StateProvider extends Component {
 
   _handleEvent = value => {
     const {
-      _firstSymbolOutput,
-      _secondSymbolOutput,
-      _secondNumberOutput
+      firstSymbolOutput,
+      secondSymbolOutput,
+      secondNumberOutput
     } = this.state;
 
     if (
-      (!isNaN(value) && !_secondNumberOutput.includes('%')) ||
-      (value === '.' && !_secondNumberOutput.includes(value)) ||
-      (value === '%' && !_secondNumberOutput.includes(value))
+      (!isNaN(value) && !secondNumberOutput.includes('%')) ||
+      (value === '.' && !secondNumberOutput.includes(value)) ||
+      (value === '%' && !secondNumberOutput.includes(value))
     ) {
       this._concatToNumberOutput(value);
     } else {
@@ -50,7 +52,7 @@ export default class StateProvider extends Component {
         case buttons[2][3]:
         case buttons[3][3]:
         case buttons[4][3]:
-          if (_firstSymbolOutput !== '=' || _secondSymbolOutput) {
+          if (firstSymbolOutput !== '=' || secondSymbolOutput) {
             this._evaluate();
             this._concatToSymbolOutput(value);
           }
@@ -65,9 +67,9 @@ export default class StateProvider extends Component {
           break;
 
         case buttons[0][2]:
-          if (_secondNumberOutput.length === 1) {
+          if (secondNumberOutput.length === 1) {
             this.setState({
-              _secondNumberOutput: initialOutput
+              secondNumberOutput: initialOutput
             });
           } else {
             this._replaceLastIndex('');
@@ -77,8 +79,8 @@ export default class StateProvider extends Component {
         case buttons[4][2]:
           this._evaluate();
           this.setState({
-            _firstSymbolOutput: value,
-            _secondSymbolOutput: ''
+            firstSymbolOutput: value,
+            secondSymbolOutput: ''
           });
           break;
       }
@@ -86,78 +88,78 @@ export default class StateProvider extends Component {
   };
 
   _concatToNumberOutput = value => {
-    const { _secondNumberOutput } = this.state;
-    if (_secondNumberOutput.length >= maxLength) {
+    const { secondNumberOutput } = this.state;
+    if (secondNumberOutput.length >= maxLength) {
       this._showMessage(`Превышен максимум в ${maxLength} цифр!`);
     } else {
-      if (_secondNumberOutput !== initialOutput) {
+      if (secondNumberOutput !== initialOutput) {
         this.setState({
-          _secondNumberOutput: _secondNumberOutput + '' + value + ''
+          secondNumberOutput: secondNumberOutput + '' + value + ''
         });
       } else {
-        this.setState({ _secondNumberOutput: value + '' });
+        this.setState({ secondNumberOutput: value + '' });
       }
     }
   };
 
   _concatToSymbolOutput = value => {
-    const { _secondSymbolOutput } = this.state;
-    if (_secondSymbolOutput) {
+    const { secondSymbolOutput } = this.state;
+    if (secondSymbolOutput) {
       this.setState({
-        _secondSymbolOutput: value + '',
-        _firstSymbolOutput: ''
+        secondSymbolOutput: value + '',
+        firstSymbolOutput: ''
       });
     } else {
       this.setState({
-        _secondSymbolOutput: '' + value,
-        _firstSymbolOutput: ''
+        secondSymbolOutput: '' + value,
+        firstSymbolOutput: ''
       });
     }
   };
 
   _replaceLastIndex = value => {
-    const { _secondNumberOutput } = this.state;
-    let str1 = _secondNumberOutput.replace(/.$/, value);
+    const { secondNumberOutput } = this.state;
+    let str1 = secondNumberOutput.replace(/.$/, value);
     this.setState({
-      _secondNumberOutput: str1
+      secondNumberOutput: str1
     });
   };
 
   _evaluate = () => {
     const {
-      _firstNumberOutput,
-      _secondNumberOutput,
-      _secondSymbolOutput,
-      _history
+      firstNumberOutput,
+      secondNumberOutput,
+      secondSymbolOutput,
+      history
     } = this.state;
 
-    let aHistory = [..._history];
-    let includesX = _secondSymbolOutput.includes('x') ? true : false;
-    let includesPercent = _secondNumberOutput.includes('%') ? true : false;
+    let aHistory = [...history];
+    let includesX = secondSymbolOutput.includes('x') ? true : false;
+    let includesPercent = secondNumberOutput.includes('%') ? true : false;
     let dEval;
     let tEval;
 
     try {
-      if (_secondNumberOutput !== initialOutput) {
+      if (secondNumberOutput !== initialOutput) {
         if (includesPercent) {
           tEval =
             eval(
-              _firstNumberOutput +
-                _secondSymbolOutput.replace(/[+]|[-]|[x]/g, '*') +
-                _secondNumberOutput.slice(0, -1)
+              firstNumberOutput +
+                secondSymbolOutput.replace(/[+]|[-]|[x]/g, '*') +
+                secondNumberOutput.slice(0, -1)
             ) / 100;
 
           if (includesX) {
             aHistory.push([
-              _firstNumberOutput + _secondSymbolOutput + _secondNumberOutput,
+              firstNumberOutput + secondSymbolOutput + secondNumberOutput,
               tEval
             ]);
           } else {
-            dEval = eval(_firstNumberOutput + _secondSymbolOutput + tEval);
+            dEval = eval(firstNumberOutput + secondSymbolOutput + tEval);
             aHistory.push([
-              _firstNumberOutput +
-                _secondSymbolOutput +
-                _secondNumberOutput +
+              firstNumberOutput +
+                secondSymbolOutput +
+                secondNumberOutput +
                 ' (' +
                 tEval +
                 ')',
@@ -166,35 +168,35 @@ export default class StateProvider extends Component {
           }
 
           this.setState({
-            _firstNumberOutput: includesX ? tEval : dEval,
-            _secondNumberOutput: initialOutput,
-            _history: aHistory
+            firstNumberOutput: includesX ? tEval : dEval,
+            secondNumberOutput: initialOutput,
+            history: aHistory
           });
         } else {
           if (
-            _firstNumberOutput !== initialOutput &&
-            isNaN(_secondSymbolOutput)
+            firstNumberOutput !== initialOutput &&
+            isNaN(secondSymbolOutput)
           ) {
             dEval = eval(
-              _firstNumberOutput +
-                this._convertToMathExpression(_secondSymbolOutput) +
-                _secondNumberOutput
+              firstNumberOutput +
+                this._convertToMathExpression(secondSymbolOutput) +
+                secondNumberOutput
             );
 
             aHistory.push([
-              _firstNumberOutput + _secondSymbolOutput + _secondNumberOutput,
+              firstNumberOutput + secondSymbolOutput + secondNumberOutput,
               dEval
             ]);
 
             this.setState({
-              _firstNumberOutput: dEval,
-              _secondNumberOutput: initialOutput,
-              _history: aHistory
+              firstNumberOutput: dEval,
+              secondNumberOutput: initialOutput,
+              history: aHistory
             });
           } else {
             this.setState({
-              _firstNumberOutput: _secondNumberOutput,
-              _secondNumberOutput: initialOutput
+              firstNumberOutput: secondNumberOutput,
+              secondNumberOutput: initialOutput
             });
           }
         }
@@ -222,22 +224,22 @@ export default class StateProvider extends Component {
 
   _initOutput = () => {
     this.setState({
-      _firstSymbolOutput: '',
-      _firstNumberOutput: initialOutput,
-      _secondSymbolOutput: '',
-      _secondNumberOutput: initialOutput
+      firstSymbolOutput: '',
+      firstNumberOutput: initialOutput,
+      secondSymbolOutput: '',
+      secondNumberOutput: initialOutput
     });
   };
 
   _clearHistory = () => {
     this.setState({
-      _history: []
+      history: []
     });
   };
 
   _setToClipboard = () => {
-    const { _firstNumberOutput } = this.state;
-    const clipboard = _firstNumberOutput.toString();
+    const { firstNumberOutput } = this.state;
+    const clipboard = firstNumberOutput.toString();
     Clipboard.setString(clipboard);
     this._showMessage(`Сохранено в буфер: ${clipboard}`);
   };
@@ -281,23 +283,23 @@ export default class StateProvider extends Component {
     return (
       <StateContext.Provider
         value={{
-          _firstSymbolOutput: this.state._firstSymbolOutput,
-          _firstNumberOutput: this.state._firstNumberOutput,
-          _secondSymbolOutput: this.state._secondSymbolOutput,
-          _secondNumberOutput: this.state._secondNumberOutput,
-          _history: this.state._history,
+          firstSymbolOutput: this.state.firstSymbolOutput,
+          firstNumberOutput: this.state.firstNumberOutput,
+          secondSymbolOutput: this.state.secondSymbolOutput,
+          secondNumberOutput: this.state.secondNumberOutput,
+          history: this.state.history,
           messageVisible: this.state.messageVisible,
           settingsVisible: this.state.settingsVisible,
           message: this.state.message,
           themeColor: this.state.themeColor,
           theme: this.state.theme,
-          styles: styles,
+          styles: this.state.styles,
+          buttons: this.state.buttons,
           _showSettings: this._showSettings,
           _changeThemeColor: this._changeThemeColor,
-          onClear: this._clearHistory,
+          _clearHistory: this._clearHistory,
           _showSettings: this._showSettings,
-          onBtnPress: this._handleEvent,
-          buttons: buttons,
+          _handleEvent: this._handleEvent,
           _styledButtons: this._styledButtons
         }}
       >
