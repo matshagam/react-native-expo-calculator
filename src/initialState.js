@@ -1,3 +1,7 @@
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+
+export const width = Dimensions.get('window').width;
+
 export const buttons = [
   ['СОХР', 'ОЧИС', 'УДАЛ', '%'],
   ['7', '8', '9', ' ÷ '],
@@ -21,3 +25,173 @@ export const theme = {
     secondaryColorTxt: '#7f8c8d'
   }
 };
+
+export const styles = StyleSheet.create({
+  container: {
+    ...Platform.select({
+      ios: {
+        paddingTop: 22
+      }
+    }),
+    flex: 1,
+    flexDirection: 'column'
+  },
+  contHistory: {
+    flex: 0.45
+  },
+  contOutput: {
+    flex: 0.25
+  },
+  contButtons: {
+    flex: 0.9
+  },
+  placeHolderOutput: {
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 5,
+    paddingHorizontal: 15
+  },
+  txtDefaultOutput: {
+    fontFamily: 'Helvetica-Light',
+    fontSize: 30,
+    width: 'auto'
+  },
+  containerHistory: {
+    flex: 1
+  },
+  clearCont: {
+    height: 30,
+    width: width,
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    zIndex: 1
+  },
+  txtExpression: {
+    fontFamily: 'Helvetica-Light',
+    fontSize: 13
+  },
+  txtResult: {
+    color: '#27ae60',
+    fontFamily: 'Helvetica-Light',
+    fontSize: 13
+  },
+  historyCont: {
+    flex: 1,
+    flexDirection: 'column',
+    marginLeft: 15,
+    marginRight: 15,
+    paddingTop: 0,
+    paddingBottom: 0,
+    backgroundColor: 'transparent'
+  },
+  expressionCont: {
+    flex: 0.7,
+    paddingTop: 5,
+    paddingBottom: 5,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'transparent'
+  },
+  resultCont: {
+    flex: 0.3,
+    paddingTop: 5,
+    paddingBottom: 5,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'transparent'
+  },
+  emptyHistoryCont: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  txtEmptyHistory: {
+    fontFamily: 'Helvetica-Light',
+    fontSize: 15
+  },
+  buttonEmptyHistoryText: {
+    fontFamily: 'Helvetica-Light',
+    fontSize: 11
+  },
+  modalView: {
+    paddingTop: 22,
+    height: '100%'
+  },
+  pickerView: {
+    height: 115,
+    width: '100%',
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  pickerLabel: {
+    paddingLeft: 15,
+    fontSize: 22
+  },
+  pickerRound: {
+    height: 130,
+    width: 130,
+    backgroundColor: '#fff',
+    right: 15,
+    alignItems: 'center',
+    borderRadius: 100
+  },
+  picker: {
+    height: 50,
+    width: 100,
+    bottom: 43
+  },
+  containerMessage: {
+    backgroundColor: '#F6F6F6',
+    position: 'absolute',
+    flex: 1,
+    bottom: 0,
+    width: '100%',
+    height: 36,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  text: {
+    color: '#000',
+    fontFamily: 'Helvetica-Light',
+    fontSize: 16
+  },
+  containerNumbers: {
+    flex: 1
+  },
+  txtDefault: {
+    fontFamily: 'Helvetica-Light',
+    fontSize: 20
+  },
+  contRow: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  contButton: {
+    flex: 1,
+    ...Platform.select({
+      ios: {
+        width: width / 4
+      }
+    }),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 0.5
+  },
+  actionStyle: {
+    backgroundColor: '#F2F2F2',
+    borderColor: '#ffff'
+  },
+  equallyStyle: {
+    backgroundColor: '#FECBCC'
+  },
+  numeralStyle: {
+    backgroundColor: '#D7E4F5'
+  }
+});
