@@ -15,8 +15,8 @@ export const ShowSettings = () => {
           }}
         >
           <Ionicons
-            name={!settingsVisible ? 'ios-settings' : 'md-close'}
-            size={23}
+            name={!settingsVisible ? 'ios-settings' : 'ios-arrow-down'}
+            size={!settingsVisible ? 23 : 35}
             color={theme.secondaryColorTxt}
             style={settingsVisible ? { alignSelf: 'center' } : null}
           />
