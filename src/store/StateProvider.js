@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Clipboard } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import {
   buttons,
@@ -33,13 +34,33 @@ export default class StateProvider extends Component {
     this._showSettings = this._showSettings.bind(this);
   }
 
+  _storeData = async props => {
+    await AsyncStorage.setItem('themeColor', props);
+  };
+
+  _retrieveData = async () => {
+    const value = await AsyncStorage.getItem('themeColor');
+    if (value !== null) {
+      this.setState(state => ({
+        themeColor: value,
+        theme: value === 'light' ? state.theme : theme.dark
+      }));
+    }
+  };
+
+  componentWillMount() {
+    this._retrieveData();
+  }
+
   componentWillUpdate(nextProps, nextState) {
     if (nextState.themeColor !== this.state.themeColor) {
       setTimeout(() => {
         this.setState({
-          settingsVisible: !this.state.settingsVisible
+          settingsVisible: false
         });
       }, 1000);
+
+      this._storeData(nextState.themeColor);
     }
   }
 
