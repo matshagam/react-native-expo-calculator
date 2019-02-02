@@ -15,17 +15,15 @@ export const ThemePicker = () => {
                 color: theme.primaryColorTxt
               }
             ]}
-          >
-            Current theme:
-          </Text>
+          />
           <View style={styles.pickerRound}>
             <Picker
               selectedValue={themeColor}
               style={styles.picker}
               onValueChange={color => _changeThemeColor(color)}
             >
-              <Picker.Item label="Light" value="light" />
-              <Picker.Item label="Dark" value="dark" />
+              <Picker.Item label='Light' value='light' />
+              <Picker.Item label='Dark' value='dark' />
             </Picker>
           </View>
         </View>

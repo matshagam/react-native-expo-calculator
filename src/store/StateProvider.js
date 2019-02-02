@@ -34,21 +34,7 @@ export default class StateProvider extends Component {
     this._showSettings = this._showSettings.bind(this);
   }
 
-  _storeData = async props => {
-    await AsyncStorage.setItem('themeColor', props);
-  };
-
-  _retrieveData = async () => {
-    const value = await AsyncStorage.getItem('themeColor');
-    if (value !== null) {
-      this.setState(state => ({
-        themeColor: value,
-        theme: value === 'light' ? state.theme : theme.dark
-      }));
-    }
-  };
-
-  componentWillMount() {
+  componentDidMount() {
     this._retrieveData();
   }
 
@@ -63,6 +49,20 @@ export default class StateProvider extends Component {
       this._storeData(nextState.themeColor);
     }
   }
+
+  _storeData = async props => {
+    await AsyncStorage.setItem('themeColor', props);
+  };
+
+  _retrieveData = async () => {
+    const value = await AsyncStorage.getItem('themeColor');
+    if (value !== null) {
+      this.setState(state => ({
+        themeColor: value,
+        theme: value === 'light' ? state.theme : theme.dark
+      }));
+    }
+  };
 
   _handleEvent = value => {
     const {

@@ -119,15 +119,14 @@ export const styles = StyleSheet.create({
     fontSize: 11
   },
   modalView: {
-    paddingTop: 22,
-    height: '100%'
+    padding: 22,
+    height: '100%',
+    justifyContent: 'space-between'
   },
   pickerView: {
-    height: 115,
+    height: 'auto',
     width: '100%',
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   pickerLabel: {
@@ -138,7 +137,6 @@ export const styles = StyleSheet.create({
     height: 130,
     width: 130,
     backgroundColor: '#fff',
-    right: 15,
     alignItems: 'center',
     borderRadius: 100
   },

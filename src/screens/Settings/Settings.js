@@ -10,11 +10,7 @@ export const Settings = () => {
   return (
     <StateContext.Consumer>
       {({ settingsVisible, theme, styles }) => (
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={settingsVisible}
-        >
+        <Modal animationType='slide' visible={settingsVisible}>
           <View
             style={[
               styles.modalView,
