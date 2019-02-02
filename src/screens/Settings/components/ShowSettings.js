@@ -9,16 +9,16 @@ export const ShowSettings = () => {
     <StateContext.Consumer>
       {({ _showSettings, theme, settingsVisible }) => (
         <TouchableOpacity
+          style={{ alignItems: 'center' }}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           onPress={() => {
             _showSettings();
           }}
         >
           <Ionicons
-            name={!settingsVisible ? 'ios-settings' : 'ios-arrow-down'}
             size={!settingsVisible ? 23 : 35}
+            name={!settingsVisible ? 'ios-settings' : 'ios-arrow-down'}
             color={theme.secondaryColorTxt}
-            style={settingsVisible ? { alignSelf: 'center' } : null}
           />
         </TouchableOpacity>
       )}

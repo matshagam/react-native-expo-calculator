@@ -120,30 +120,12 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     padding: 22,
-    height: '100%',
+    flex: 1,
     justifyContent: 'space-between'
   },
-  pickerView: {
-    height: 'auto',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  pickerLabel: {
-    paddingLeft: 15,
-    fontSize: 22
-  },
-  pickerRound: {
-    height: 130,
-    width: 130,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    borderRadius: 100
-  },
   picker: {
-    height: 50,
     width: 100,
-    bottom: 43
+    alignSelf: 'center'
   },
   containerMessage: {
     backgroundColor: '#F6F6F6',

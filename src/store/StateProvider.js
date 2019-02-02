@@ -40,11 +40,9 @@ export default class StateProvider extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.themeColor !== this.state.themeColor) {
-      setTimeout(() => {
-        this.setState({
-          settingsVisible: false
-        });
-      }, 1000);
+      this.setState({
+        settingsVisible: false
+      });
 
       this._storeData(nextState.themeColor);
     }
