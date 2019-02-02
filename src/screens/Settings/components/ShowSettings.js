@@ -15,7 +15,7 @@ export const ShowSettings = () => {
           }}
         >
           <Ionicons
-            name={!settingsVisible ? 'ios-settings-outline' : 'md-close'}
+            name={!settingsVisible ? 'ios-settings' : 'md-close'}
             size={23}
             color={theme.secondaryColorTxt}
             style={settingsVisible ? { alignSelf: 'center' } : null}

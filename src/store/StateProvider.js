@@ -33,6 +33,16 @@ export default class StateProvider extends Component {
     this._showSettings = this._showSettings.bind(this);
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.themeColor !== this.state.themeColor) {
+      setTimeout(() => {
+        this.setState({
+          settingsVisible: !this.state.settingsVisible
+        });
+      }, 1000);
+    }
+  }
+
   _handleEvent = value => {
     const {
       firstSymbolOutput,
