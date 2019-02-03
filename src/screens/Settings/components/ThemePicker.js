@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Picker } from 'react-native';
+import { Picker } from 'react-native';
 
 import { StateContext } from '../../../store/StateProvider';
 
