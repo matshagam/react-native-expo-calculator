@@ -290,13 +290,6 @@ export default class StateProvider extends Component {
     }));
   };
 
-  // _changeThemeColor = color => {
-  //   this.setState({
-  //     themeColor: color === 'light' ? 'light' : 'dark',
-  //     theme: color === 'light' ? theme.light : theme.dark
-  //   });
-  // };
-
   _styledButtons = (rowIndex, colIndex) => {
     if (rowIndex === 0 && colIndex === 3) return styles.numeralStyle;
     if (rowIndex === 1 && colIndex === 3) return styles.numeralStyle;
