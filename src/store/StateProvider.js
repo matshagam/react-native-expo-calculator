@@ -34,16 +34,12 @@ export default class StateProvider extends Component {
     this._showSettings = this._showSettings.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this._retrieveData();
   }
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.themeColor !== this.state.themeColor) {
-      this.setState({
-        settingsVisible: false
-      });
-
       this._storeData(nextState.themeColor);
     }
   }

@@ -7,17 +7,16 @@ import { StateContext } from '../../../store/StateProvider';
 export const ShowSettings = () => {
   return (
     <StateContext.Consumer>
-      {({ _showSettings, theme, settingsVisible }) => (
+      {({ _showSettings, theme }) => (
         <TouchableOpacity
-          style={settingsVisible ? { alignItems: 'center' } : null}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           onPress={() => {
             _showSettings();
           }}
         >
           <Ionicons
-            size={settingsVisible ? 35 : 23}
-            name={settingsVisible ? 'ios-arrow-down' : 'ios-settings'}
+            size={23}
+            name='ios-settings'
             color={theme.secondaryColorTxt}
           />
         </TouchableOpacity>

@@ -32,7 +32,13 @@ export const HistoryView = () => {
                 { backgroundColor: theme.primaryColor }
               ]}
             >
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  opacity: 0.5
+                }}
+              >
                 <ShowSettings />
                 <NightMode />
               </View>
