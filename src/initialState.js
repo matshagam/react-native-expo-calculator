@@ -118,6 +118,11 @@ export const styles = StyleSheet.create({
     fontFamily: 'Helvetica-Light',
     fontSize: 11
   },
+  buttonsLeftSide: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    opacity: 0.5
+  },
   modalView: {
     padding: 22,
     flex: 1,

@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
+export const width = Dimensions.get('window').width;
 
 import { ShowSettings } from '../Settings/components/ShowSettings';
 import { NightMode } from '../NightMode/NightMode';
@@ -32,13 +33,7 @@ export const HistoryView = () => {
                 { backgroundColor: theme.primaryColor }
               ]}
             >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  opacity: 0.5
-                }}
-              >
+              <View style={styles.buttonsLeftSide}>
                 <ShowSettings />
                 <NightMode />
               </View>
