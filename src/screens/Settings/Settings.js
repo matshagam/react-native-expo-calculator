@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, TouchableOpacity } from 'react-native';
+import { Modal, View, TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { StateContext } from '../../store/StateProvider';
@@ -30,6 +30,14 @@ export const Settings = () => {
                 color={theme.secondaryColorTxt}
               />
             </TouchableOpacity>
+            <Text
+              style={{
+                color: theme.secondaryColorTxt,
+                alignSelf: 'center'
+              }}
+            >
+              НАСТРОЙКИ КАЛЬКУЛЯТОРА
+            </Text>
           </View>
         </Modal>
       )}
