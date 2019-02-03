@@ -21,6 +21,7 @@ export default class StateProvider extends Component {
       secondSymbolOutput: '',
       secondNumberOutput: initialOutput,
       history: [],
+      saveHistory: false,
       messageVisible: false,
       settingsVisible: false,
       message: '',
@@ -56,6 +57,12 @@ export default class StateProvider extends Component {
         theme: value === 'light' ? state.theme : theme.dark
       }));
     }
+  };
+
+  _saveData = () => {
+    this.setState(state => ({
+      saveHistory: !state.saveHistory
+    }));
   };
 
   _handleEvent = value => {
@@ -320,7 +327,9 @@ export default class StateProvider extends Component {
           theme: this.state.theme,
           styles: this.state.styles,
           buttons: this.state.buttons,
+          saveHistory: this.state.saveHistory,
           _showSettings: this._showSettings,
+          _saveData: this._saveData,
           _changeThemeColor: this._changeThemeColor,
           _clearHistory: this._clearHistory,
           _showSettings: this._showSettings,
