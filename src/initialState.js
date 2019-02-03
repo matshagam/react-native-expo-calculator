@@ -123,10 +123,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between'
   },
-  picker: {
-    width: 100,
-    alignSelf: 'center'
-  },
   containerMessage: {
     backgroundColor: '#F6F6F6',
     position: 'absolute',

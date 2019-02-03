@@ -2,22 +2,22 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { StateContext } from '../../../store/StateProvider';
+import { StateContext } from '../../store/StateProvider';
 
-export const ShowSettings = () => {
+export const NightMode = () => {
   return (
     <StateContext.Consumer>
-      {({ _showSettings, theme, settingsVisible }) => (
+      {({ _changeThemeColor, theme }) => (
         <TouchableOpacity
-          style={settingsVisible ? { alignItems: 'center' } : null}
+          style={{ marginLeft: 20 }}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           onPress={() => {
-            _showSettings();
+            _changeThemeColor();
           }}
         >
           <Ionicons
-            size={settingsVisible ? 35 : 23}
-            name={settingsVisible ? 'ios-arrow-down' : 'ios-settings'}
+            size={20}
+            name='ios-contrast'
             color={theme.secondaryColorTxt}
           />
         </TouchableOpacity>

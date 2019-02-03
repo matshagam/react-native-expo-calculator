@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, View } from 'react-native';
 
-import { ThemePicker } from './components/ThemePicker';
 import { ShowSettings } from './components/ShowSettings';
 import { StateContext } from '../../store/StateProvider';
 
@@ -19,7 +18,6 @@ export const Settings = () => {
             ]}
           >
             <ShowSettings />
-            <ThemePicker />
           </View>
         </Modal>
       )}

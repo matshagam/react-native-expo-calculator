@@ -1,8 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Message } from './components/Message';
 import { ShowSettings } from '../Settings/components/ShowSettings';
+import { NightMode } from '../NightMode/NightMode';
+import { Message } from './components/Message';
 import { ClearHistory } from './components/ClearHistory';
 import { ScrollHistory } from './components/ScrollHistory';
 import { EmptyHistory } from './components/EmptyHistory';
@@ -31,7 +32,10 @@ export const HistoryView = () => {
                 { backgroundColor: theme.primaryColor }
               ]}
             >
-              <ShowSettings />
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <ShowSettings />
+                <NightMode />
+              </View>
               <ClearHistory />
             </View>
             {history.length !== 0 ? <ScrollHistory /> : <EmptyHistory />}
