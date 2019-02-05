@@ -16,7 +16,7 @@ export const NightMode = () => {
           }}
         >
           <Ionicons
-            size={23}
+            size={20}
             name={themeColor === 'light' ? 'ios-moon' : 'ios-sunny'}
             color={theme.secondaryColorTxt}
           />

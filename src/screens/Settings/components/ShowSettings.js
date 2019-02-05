@@ -15,7 +15,7 @@ export const ShowSettings = () => {
           }}
         >
           <Ionicons
-            size={23}
+            size={20}
             name='ios-settings'
             color={theme.secondaryColorTxt}
           />
